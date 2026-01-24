@@ -67,7 +67,6 @@ publish_rate: 1.0
     "/amcl_pose": {
       "topic": "/amcl_pose",
       "healthy": true,
-      "message_count": 150,
       "metrics": {
         "frequency": {
           "metric": "frequency",
@@ -75,7 +74,6 @@ publish_rate: 1.0
           "std_dt": 0.002,
           "mean_dt": 0.1,
           "max_gap": 0.12,
-          "gap_count": 0,
           "samples": 100,
           "healthy": true
         },
@@ -86,7 +84,6 @@ publish_rate: 1.0
           "trace_total": 0.0031,
           "max_eigenvalue": 0.002,
           "determinant": 0.0,
-          "samples": 150,
           "healthy": true
         }
       }
@@ -94,7 +91,6 @@ publish_rate: 1.0
     "/odom": {
       "topic": "/odom",
       "healthy": true,
-      "message_count": 1000,
       "metrics": {
         "frequency": {
           "metric": "frequency",
@@ -102,7 +98,6 @@ publish_rate: 1.0
           "std_dt": 0.001,
           "mean_dt": 0.066,
           "max_gap": 0.08,
-          "gap_count": 0,
           "samples": 100,
           "healthy": true
         }

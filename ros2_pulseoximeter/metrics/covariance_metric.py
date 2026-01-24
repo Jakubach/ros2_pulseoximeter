@@ -9,13 +9,11 @@ class CovarianceMetric(BaseMetric):
     def __init__(self, name: str, config: Dict[str, Any]):
         super().__init__(name, config)
         self.trace_position_threshold = config.get('trace_position_threshold', 0.5)
-
         self._last_covariance: np.ndarray | None = None
         self._last_trace_position = 0.0
         self._last_trace_orientation = 0.0
         self._last_max_eigenvalue = 0.0
         self._last_determinant = 0.0
-        self._sample_count = 0
 
     def update(self, msg: Any, timestamp: float) -> None:
         covariance = self._extract_covariance(msg)
@@ -23,8 +21,6 @@ class CovarianceMetric(BaseMetric):
             return
 
         self._last_covariance = covariance
-        self._sample_count += 1
-
         cov_matrix = covariance.reshape(6, 6)
 
         self._last_trace_position = cov_matrix[0, 0] + cov_matrix[1, 1] + cov_matrix[2, 2]
@@ -46,7 +42,6 @@ class CovarianceMetric(BaseMetric):
             'trace_total': float(self._last_trace_position + self._last_trace_orientation),
             'max_eigenvalue': float(self._last_max_eigenvalue),
             'determinant': float(self._last_determinant),
-            'samples': self._sample_count,
             'healthy': bool(self.is_healthy)
         }
 
@@ -56,7 +51,6 @@ class CovarianceMetric(BaseMetric):
         self._last_trace_orientation = 0.0
         self._last_max_eigenvalue = 0.0
         self._last_determinant = 0.0
-        self._sample_count = 0
 
     @property
     def is_healthy(self) -> bool:
@@ -67,11 +61,6 @@ class CovarianceMetric(BaseMetric):
     def _extract_covariance(self, msg: Any) -> np.ndarray | None:
         if hasattr(msg, 'pose') and hasattr(msg.pose, 'covariance'):
             return np.array(msg.pose.covariance)
-
-        if hasattr(msg, 'pose') and hasattr(msg.pose, 'pose') and hasattr(msg.pose, 'covariance'):
-            return np.array(msg.pose.covariance)
-
         if hasattr(msg, 'covariance'):
             return np.array(msg.covariance)
-
         return None

@@ -19,5 +19,9 @@ topics:
   /scan:
     type: sensor_msgs/msg/LaserScan
     metrics: [frequency]
+    qos:
+      reliability: best_effort
+      durability: volatile
+      depth: 1
 
 publish_rate: 1.0  # Hz

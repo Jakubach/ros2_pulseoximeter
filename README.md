@@ -14,7 +14,7 @@ ROS2 package for monitoring topic health with pluggable metrics.
 
 ```bash
 cd ~/ros2_ws/src
-git clone <repo_url> ros2_pulseoximeter
+git clone https://github.com/Jakubach/ros2_pulseoximeter.git ros2_pulseoximeter
 cd ~/ros2_ws
 colcon build --packages-select ros2_pulseoximeter
 ```
@@ -33,8 +33,8 @@ Edit `config/monitor_config.yaml`:
 ```yaml
 metrics:
   frequency:
-    window_size: 100        # samples
-    std_threshold: 0.1      # seconds
+    window_size: 100               # samples
+    std_threshold: 0.1             # seconds
   covariance:
     trace_position_threshold: 0.5  # m²
 

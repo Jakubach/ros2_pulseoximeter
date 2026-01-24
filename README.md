@@ -33,10 +33,10 @@ Edit `config/monitor_config.yaml`:
 ```yaml
 metrics:
   frequency:
-    window_size: 100
-    std_threshold: 0.1
+    window_size: 100        # samples
+    std_threshold: 0.1      # seconds
   covariance:
-    trace_position_threshold: 0.5
+    trace_position_threshold: 0.5  # m²
 
 topics:
   /amcl_pose:
@@ -116,3 +116,4 @@ publish_rate: 1.0
 ## License
 
 MIT
+

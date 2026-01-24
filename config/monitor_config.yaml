@@ -1,0 +1,23 @@
+metrics:
+  frequency:
+    window_size: 100
+    std_threshold: 0.1
+  covariance:
+    trace_position_threshold: 0.5
+
+topics:
+  /amcl_pose:
+    type: geometry_msgs/msg/PoseWithCovarianceStamped
+    metrics: [frequency, covariance]
+    qos:
+      reliability: reliable
+      durability: transient_local
+      depth: 1
+  /odom:
+    type: nav_msgs/msg/Odometry
+    metrics: [frequency]
+  /scan:
+    type: sensor_msgs/msg/LaserScan
+    metrics: [frequency]
+
+publish_rate: 1.0  # Hz

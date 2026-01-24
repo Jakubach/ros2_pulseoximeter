@@ -12,6 +12,7 @@ from .topic_monitor import TopicMonitor
 from .metrics.base_metric import BaseMetric
 from .metrics.frequency_metric import FrequencyMetric
 from .metrics.covariance_metric import CovarianceMetric
+from .metrics.pose_jump_metric import PoseJumpMetric
 
 
 class MonitorNode(Node):
@@ -19,6 +20,7 @@ class MonitorNode(Node):
     METRIC_REGISTRY: Dict[str, Type[BaseMetric]] = {
         'frequency': FrequencyMetric,
         'covariance': CovarianceMetric,
+        'pose_jump': PoseJumpMetric,
     }
 
     def __init__(self):

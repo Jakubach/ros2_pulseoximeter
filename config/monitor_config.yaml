@@ -3,7 +3,9 @@ metrics:
     window_size: 100
     std_threshold: 0.1
   covariance:
-    trace_position_threshold: 0.5
+    trace_position_threshold: 1.0
+  pose_jump:
+    jump_threshold: 1.0
 
 topics:
   /amcl_pose:

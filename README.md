@@ -6,6 +6,7 @@ ROS2 package for monitoring topic health with pluggable metrics.
 
 - **Frequency monitoring** - detects lag, gaps, unstable publishing rates
 - **Covariance monitoring** - tracks localization uncertainty (for AMCL, EKF, etc.)
+- **Pose jump detection** - detects sudden position changes (bad initial pose, robot repositioning)
 - **Pluggable architecture** - easy to add custom metrics
 - **Configurable QoS** - supports transient_local, reliable, best_effort
 - **JSON output** - easy integration with other systems
@@ -36,12 +37,14 @@ metrics:
     window_size: 100               # samples
     std_threshold: 0.1             # seconds
   covariance:
-    trace_position_threshold: 0.5  # m²
+    trace_position_threshold: 1.0  # m²
+  pose_jump:
+    jump_threshold: 1.0            # m
 
 topics:
   /amcl_pose:
     type: geometry_msgs/msg/PoseWithCovarianceStamped
-    metrics: [frequency, covariance]
+    metrics: [frequency, covariance, pose_jump]
     qos:
       reliability: reliable
       durability: transient_local
@@ -84,6 +87,12 @@ publish_rate: 1.0
           "trace_total": 0.0031,
           "max_eigenvalue": 0.002,
           "determinant": 0.0,
+          "healthy": true
+        },
+        "pose_jump": {
+          "metric": "pose_jump",
+          "last_jump": 0.0,
+          "jump_detected": false,
           "healthy": true
         }
       }

@@ -10,7 +10,7 @@ metrics:
 topics:
   /amcl_pose:
     type: geometry_msgs/msg/PoseWithCovarianceStamped
-    metrics: [frequency, covariance]
+    metrics: [covariance, pose_jump]
     qos:
       reliability: reliable
       durability: transient_local

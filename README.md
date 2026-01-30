@@ -44,7 +44,7 @@ metrics:
 topics:
   /amcl_pose:
     type: geometry_msgs/msg/PoseWithCovarianceStamped
-    metrics: [frequency, covariance, pose_jump]
+    metrics: [covariance, pose_jump]
     qos:
       reliability: reliable
       durability: transient_local
@@ -71,15 +71,6 @@ publish_rate: 1.0
       "topic": "/amcl_pose",
       "healthy": true,
       "metrics": {
-        "frequency": {
-          "metric": "frequency",
-          "frequency_hz": 10.0,
-          "std_dt": 0.002,
-          "mean_dt": 0.1,
-          "max_gap": 0.12,
-          "samples": 100,
-          "healthy": true
-        },
         "covariance": {
           "metric": "covariance",
           "trace_position": 0.003,
